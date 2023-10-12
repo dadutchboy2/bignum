@@ -1,9 +1,8 @@
 goes up to 10^^1.797693e308 according to the string conversion, negative and inverse numbers have normal javascript number range
 
 how to use:
-1 dont look at the code
-2 convert number to bignum with Big(100)
-3 to do math, use this list and dont look in the code for it:
+1 convert number to bignum with Big(100)
+2 to do math, use this list:
   - bignum.smp(x) e ** bignum + e ** x = e ** result
   - bignum.smn(x) e ** bignum - e ** x = e ** result
   - bignum.add(x) bignum +  x
