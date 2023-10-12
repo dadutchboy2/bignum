@@ -21,4 +21,4 @@ how to use:
   - bignum.neq(x) bignum != x aka Not EQual
   - bignum.les(x) bignum <  x aka LESs
   - bignum.moe(x) bignum >= x aka More Or Equal
-  - bignum.str()  converts to string (100, 1e100, ee1e100, 10^^10)
+  - bignum.str/toString()  converts to string (100, 1e100, ee1e100, 10^^10)
