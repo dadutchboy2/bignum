@@ -185,9 +185,9 @@ $ptc = (num, bas) =>
 			hei >= 1 && (a = a.div($lon(bas))),
 			bas ** a.val != Infinity && hei > 0 && (a.val = bas ** a.val, hei--)
 		) : (
-			hei >= 3 && (a = a.smp($lln(1/$lon(bas)))),
-			hei >= 2 && (a = a.add($lon(1/$lon(bas)))),
-			hei >= 1 && (a = a.mul(1/$lon(bas))),
+			hei >= 3 && (a = a.smp($lln(1 / $lon(bas)))),
+			hei >= 2 && (a = a.add($lon(1 / $lon(bas)))),
+			hei >= 1 && (a = a.mul(1 / $lon(bas))),
 			a.hei == 1 && (a = a.log(bas), hei++)
 		),
 		[a.val, hei]
