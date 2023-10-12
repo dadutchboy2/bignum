@@ -1,7 +1,9 @@
 how to use:
 1 dont look at the code
 2 convert number to bignum with Big(100)
-3 to do math, use this list and dont look at the code for it:
+3 to do math, use this list and dont look in the code for it:
+  - bignum.smp(100) smooth maximum of bignum and 100
+  - bignum.smn(100) same as smp but subtracts from bignum instead
   - bignum.add(100) bignum + 100
   - bignum.sub(100) bignum - 100
   - bignum.mul(100) bignum * 100
