@@ -200,7 +200,7 @@ $str = f((a) =>
 	a.les(1000000) ? $sfe(a, 6) :
 	(([val, hei]) =>
 		a.les($enm) ? ((num) => (
-			num.les(1000) && (num = num.exp(10), hei++),
+			num.les(1000) && (num = num.exp(10), hei--),
 			"e".repeat(hei) + $sfe(num, 6)
 		))(Big(val)) : (
 			((f) => f(f))((f) =>
