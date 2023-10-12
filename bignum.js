@@ -84,7 +84,7 @@ $sub = f((a, b) =>
 $mul = f((a, b) =>
 	(([a, b]) =>
 		b.hei == 0 && Math.abs(b.val) < 1 ? a.div(1 / b.val) :
-		a.hei >= 3 && Number.isFinite(b.val) ? a :
+		a.hei >= 3 ? a :
 		a.hei >= 1 || a.hei == 0 && a.val * b.val == Infinity && (
 			a.hei++, a.val = Math.log(a.val), true
 		) ? ((sign) => (
@@ -104,7 +104,7 @@ $mul = f((a, b) =>
 $div = f((a, b) =>
 	((a, b) =>
 		b.hei == 0 && Math.abs(b.val) < 1 ? a.mul(1 / b.val) :
-		a.hei >= 3 && Number.isFinite(b.val) ? a :
+		a.hei >= 3 && a.mor(b) ? a :
 		a.hei >= 1 ? ((sign) => (
 			a.hei--,
 			b.val *= sign,
