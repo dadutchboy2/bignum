@@ -47,7 +47,7 @@ $smn = f((a, b) =>
 
 $add = f((a, b) =>
 	(([a, b]) =>
-		b.hei == 0 && b.val < 0 ? a.sub(Big(-b.val)) :
+		b.hei == 0 && b.val < 0 ? a.sub(-b.val) :
 		a.hei >= 2 ? a :
 		a.hei == 1 || a.val + b.val == Infinity ? (
 			a = a.log(),
@@ -60,7 +60,7 @@ $add = f((a, b) =>
 $sub = f((a, b) =>
 	((a, b) =>
 		a.hei == b.hei && a.val == b.val ? Big(0) :
-		b.hei == 0 && b.val < 0 ? a.add(Big(-b.val)) :
+		b.hei == 0 && b.val < 0 ? a.add(-b.val) :
 		(([a, b], diffSign) => (
 			a.hei >= 2 || (
 				a.hei == 1 ? (
@@ -83,7 +83,7 @@ $sub = f((a, b) =>
 
 $mul = f((a, b) =>
 	(([a, b]) =>
-		b.hei == 0 && Math.abs(b.val) < 1 ? a.div(Big(1 / b)) :
+		b.hei == 0 && Math.abs(b.val) < 1 ? a.div(1 / b.val) :
 		a.hei >= 3 && Number.isFinite(b.val) ? a :
 		a.hei >= 1 || a.hei == 0 && a.val * b.val == Infinity && (
 			a.hei++, a.val = Math.log(a.val), true
@@ -103,7 +103,7 @@ $mul = f((a, b) =>
 
 $div = f((a, b) =>
 	((a, b) =>
-		b.hei == 0 && Math.abs(b.val) < 1 ? a.mul(Big(1 / b.val)) :
+		b.hei == 0 && Math.abs(b.val) < 1 ? a.mul(1 / b.val) :
 		a.hei >= 3 && Number.isFinite(b.val) ? a :
 		a.hei >= 1 ? ((sign) => (
 			a.hei--,
