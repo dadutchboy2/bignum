@@ -1,4 +1,4 @@
-goes up to 10^^1.797693e308 according to the string conversion
+goes up to 10^^1.797693e308 according to the string conversion, negative and inverse numbers have normal javascript number range
 
 how to use:
 1 dont look at the code
