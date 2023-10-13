@@ -4,12 +4,10 @@
 
 //the math relies HEAVILY on the amount of precision and the above rules lmfao
 
-function f(f) {
-	return function() {
-		Array.prototype.unshift.call(arguments, this);
-		return f.apply(null, arguments);
-	}
-}
+f = (f) => function() {
+	Array.prototype.unshift.call(arguments, this);
+	return f.apply(null, arguments);
+};
 
 $gds = (a, b) =>
 	((a, b) =>
