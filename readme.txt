@@ -23,10 +23,10 @@ how to use:
   - bignum.log(x) x ** result = bignum (x = e by default)
   - bignum.min(x) min(bignum, x)
   - bignum.max(x) max(bignum, x)
-  - bignum.mor(x) bignum >  x aka MORe
-  - bignum.loe(x) bignum <= x aka Less Or Equal
-  - bignum.equ(x) bignum == x aka EQUal
-  - bignum.neq(x) bignum != x aka Not EQual
-  - bignum.les(x) bignum <  x aka LESs
-  - bignum.moe(x) bignum >= x aka More Or Equal
-  - bignum.str/toString()  converts to string (100, 1e100, ee1e100, 10^^10)
+  - bignum.gt(x)  bignum >  x
+  - bignum.lte(x) bignum <= x
+  - bignum.eq(x)  bignum == x
+  - bignum.neq(x) bignum != x
+  - bignum.lt(x)  bignum <  x
+  - bignum.gte(x) bignum >= x
+  - bignum.str/toString() converts to string (100, 1e100, ee1e100, 10^^10)
