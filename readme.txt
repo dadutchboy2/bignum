@@ -13,6 +13,7 @@ how to use:
 1 convert number to bignum with Big(100)
 2 to do math, use this list:
   - bignum.cmp(x) 1 if bignum > x, 0 if bignum = x, -1 if bignum < x
+  - bignum.gsp(x) sorts into array where [0] >= [1]
   - bignum.smp(x) e ** bignum + e ** x = e ** result
   - bignum.smn(x) e ** bignum - e ** x = e ** result
   - bignum.add(x) bignum +  x
