@@ -28,7 +28,7 @@ $gsp = (a, b) =>
 $smp = f((a, b) =>
 	(([a, b]) =>
 		a.hei >= 1 ? a : (
-			a.val += Math.log(1 + 1 / Math.exp(a.val - b.val)),
+			a.val += Math.log1p(Math.exp(b.val - a.val)),
 			a
 		)
 	)($gsp(a, b))
@@ -37,7 +37,7 @@ $smp = f((a, b) =>
 $smn = f((a, b) =>
 	((a, b) =>
 		a.hei >= 1 ? a : (
-			a.val += Math.log(1 - 1 / Math.exp(a.val - b.val)),
+			a.val += Math.log1p(-Math.exp(b.val - a.val)),
 			a
 		)
 	)(a, Big(b))
