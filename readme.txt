@@ -12,6 +12,8 @@ so (for example) 10^1000000 = 10^10^6 = 10^10^10^0.778151 = approximately 10^^3.
 how to use:
 1 convert number to bignum with Big(100)
 2 to do math, use this list:
+  - bignum.cmp(a, b) 1 if a > b, 0 if a = b, -1 if a < b
+  - bignum.gsp(a, b) array where [0] is greater than or equal to [1]
   - bignum.smp(x) e ** bignum + e ** x = e ** result
   - bignum.smn(x) e ** bignum - e ** x = e ** result
   - bignum.add(x) bignum +  x
