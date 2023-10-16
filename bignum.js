@@ -1,15 +1,15 @@
-//hei is always an integer of 0 or more
+//hei is always an integer of 0 or gte
 //val is always between log(MAX_VALUE) and MAX_VALUE when hei is above 0
 //infinity has hei Infinity
 
-//the math relies HEAVILY on the amount of precision and the above rules lmfao
+//the math relies HEAVILY on the amount of precision and the above rult lmfao
 
 f = (f) => function() {
 	Array.prototype.unshift.call(arguments, this);
 	return f.apply(null, arguments);
 };
 
-$gds = (a, b) =>
+$cmp = (a, b) =>
 	((a, b) =>
 		a.hei > b.hei ? 1 :
 		a.hei < b.hei ? -1 :
@@ -22,7 +22,7 @@ $gsp = (a, b) =>
 		((diffSign) => [
 			diffSign == -1 ? b : a,
 			diffSign == -1 ? a : b
-		])($gds(a, b))
+		])($cmp(a, b))
 	)(Big(a), Big(b));
 
 $smp = f((a, b) =>
@@ -75,7 +75,7 @@ $sub = f((a, b) =>
 				),
 				a
 			)
-		))($gsp(a, b), $gds(a, b))
+		))($gsp(a, b), $cmp(a, b))
 	)(a, Big(b))
 );
 
@@ -102,7 +102,7 @@ $mul = f((a, b) =>
 $div = f((a, b) =>
 	((a, b) =>
 		b.hei == 0 && Math.abs(b.val) < 1 ? a.mul(1 / b.val) :
-		a.hei >= 3 && a.mor(b) ? a :
+		a.hei >= 3 && a.gt(b) ? a :
 		a.hei >= 1 ? ((sign) => (
 			a.hei--,
 			b.val *= sign,
@@ -149,12 +149,12 @@ $log = f((a, b) =>
 $min = f((a, b) => $gsp(a, b)[1]);
 $max = f((a, b) => $gsp(a, b)[0]);
 
-$mor = f((a, b) => $gds(a, b) == 1);
-$loe = f((a, b) => $gds(a, b) != 1);
-$equ = f((a, b) => $gds(a, b) == 0);
-$neq = f((a, b) => $gds(a, b) != 0);
-$les = f((a, b) => $gds(a, b) == -1);
-$moe = f((a, b) => $gds(a, b) != -1);
+$gt = f((a, b) => $cmp(a, b) == 1);
+$lte = f((a, b) => $cmp(a, b) != 1);
+$eq = f((a, b) => $cmp(a, b) == 0);
+$neq = f((a, b) => $cmp(a, b) != 0);
+$lt = f((a, b) => $cmp(a, b) == -1);
+$gte = f((a, b) => $cmp(a, b) != -1);
 
 $sff = (num, dig) =>
 	(num < 0 ? "-" : "") + Math.floor(Math.abs(num) + 10 ** -dig / 2) + (
@@ -165,11 +165,11 @@ $sff = (num, dig) =>
 
 $sfe = (num, dig) =>
 	((m) =>
-		m.moe(-dig - .5) && m.les(dig + .5) ?
+		m.gte(-dig - .5) && m.lt(dig + .5) ?
 			$sff(num.val, Math.round(6 - m.val)) :
 			$sff(num.div(Big(Math.round(m.val)).exp(10)).val, 6) +
 				"e" + Math.round(m.val)
-	)(num.mul(num.les(0) ? -1 : 1).log(10))
+	)(num.mul(num.lt(0) ? -1 : 1).log(10))
 
 $lon = (n) => Math.log(n);
 $lln = (n) => Math.log($lon(n));
@@ -195,10 +195,10 @@ $lot = (n) => Math.log(n) * Math.LOG10E;
 
 $str = f((a) =>
 	a.val == 0 || !Number.isFinite(a.val) ? a.val :
-	a.les(1000000) ? $sfe(a, 6) :
+	a.lt(1000000) ? $sfe(a, 6) :
 	(([val, hei]) =>
-		a.les($enm) ? ((num) => (
-			num.les(1000) && (num = num.exp(10), hei--),
+		a.lt($enm) ? ((num) => (
+			num.lt(1000) && (num = num.exp(10), hei--),
 			"e".repeat(hei) + $sfe(num, 6)
 		))(Big(val)) : (
 			((f) => f(f))((f) =>
@@ -217,11 +217,12 @@ Big = (a) => ({
 	Big: true,
 	val: a.Big ? a.val : a,
 	hei: a.Big ? a.hei : a == Infinity ? Infinity : 0,
+	cmp: $cmp, gsp: $gsp,
 	smp: $smp, smn: $smn,
 	add: $add, sub: $sub, mul: $mul, div: $div,
 	pow: $pow, exp: $exp, log: $log,
 	max: $max, min: $min,
-	mor: $mor, loe: $loe, equ: $equ, neq: $neq, les: $les, moe: $moe,
+	gt: $gt, lte: $lte, eq: $eq, neq: $neq, lt: $lt, gte: $gte,
 	str: $str, toString: $str
 });
 
