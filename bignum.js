@@ -47,7 +47,7 @@ $str = (a) =>
 	a.lt(1000000) ? $sfe(a, 6) :
 	(([val, hei]) =>
 		a.lt($enm) ? ((num) => (
-			num.lt(1000) && (num = num.exp(10), hei--),
+			num.lt(1000) && ((num = num.exp(10)), hei--),
 			"e".repeat(hei) + $sfe(num, 6)
 		))(new Big(val)) : (
 			((f) => f(f))((f) => {
