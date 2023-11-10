@@ -197,9 +197,9 @@ class Big {
 	}
 	pow(n) {
 		return ((a, b) =>
-			b.hei == 0 && a.hei == 0 && b.val ** a.val != Infinity ? (
-				b.val **= a.val,
-				b
+			a.hei == 0 && b.hei == 0 && a.val ** b.val != Infinity ? (
+				a.val **= b.val,
+				a
 			) : b.exp(a)
 		)(new Big(this), new Big(n));
 	}
