@@ -11,7 +11,7 @@ so (for example) 10^1000000 = 10^10^6 = 10^10^10^0.778151 = approximately 10^^3.
 
 how to use:
 1 convert number to bignum with new Big(100)
-2 to do math, use this list:
+2 to do math, use this list (alternatively e.g. Big.cmp(bignum, x)):
   - bignum.cmp(x) 1 if bignum > x, 0 if bignum = x, -1 if bignum < x
   - bignum.gsp(x) sorts into array where [0] >= [1]
   - bignum.smp(x) e ** bignum + e ** x = e ** result
