@@ -9,13 +9,13 @@ $sff = (num, dig) =>
 		dig > 0 ? "." + (
 			"0".repeat(dig) + Math.round(Math.abs(num) * 10 ** dig)
 		).substr(-dig) : ""
-	).replace(/(0|\.)+$/g, "");
+	);
 
 $sfe = (num, dig) =>
 	((m) =>
 		m.gte(-dig - .5) && m.lt(dig + .5) ?
-			$sff(num.val, Math.round(6 - m.val)) :
-			$sff(num.div(new Big(Math.round(m.val)).exp(10)).val, 6) +
+			$sff(num.val, Math.round(dig - m.val)) :
+			$sff(num.div(new Big(Math.round(m.val)).exp(10)).val, dig) +
 				"e" + Math.round(m.val)
 	)(num.mul(num.lt(0) ? -1 : 1).log(10));
 
@@ -44,7 +44,7 @@ $lnd = Math.log(10);
 
 $str = (a) =>
 	a.val == 0 || !Number.isFinite(a.val) ? "" + a.val :
-	a.lt(1000000) ? $sfe(a, 6) :
+	a.log(10).lt(6.5) ? $sfe(a, Math.round(a.log(10).val) + 1) :
 	(([val, hei]) =>
 		a.lt($enm) ? ((num) => (
 			num.lt(1000) && ((num = num.exp(10)), hei--),
@@ -183,6 +183,14 @@ class Big {
 			))(Math.sign(b.val)) : (a.val /= b.val, a)
 		)(new Big(this), new Big(n));
 	}
+	pow(n) {
+		return ((a, b) =>
+			a.hei == 0 && b.hei == 0 && a.val ** b.val != Infinity ? (
+				a.val **= b.val,
+				a
+			) : b.exp(a)
+		)(new Big(this), new Big(n));
+	}
 	exp(n) {
 		return ((a, b) => (
 			Math.abs(b.val) < 1 ? a.mul(-1).exp(1 / b.val) : (
@@ -194,14 +202,6 @@ class Big {
 				a
 			)
 		))(new Big(this), n != undefined && new Big(n));
-	}
-	pow(n) {
-		return ((a, b) =>
-			a.hei == 0 && b.hei == 0 && a.val ** b.val != Infinity ? (
-				a.val **= b.val,
-				a
-			) : b.exp(a)
-		)(new Big(this), new Big(n));
 	}
 	log(n) {
 		return ((a, b) => (
@@ -219,8 +219,29 @@ class Big {
 	lt(n) {return this.cmp(n) == -1;}
 	gte(n) {return this.cmp(n) != -1;}
 	str() {
-		return $str(this);
+		return $str(new Big(this));
 	}
 }
+
+Big.cmp = (a, b) => new Big(a).cmp(b);
+Big.gsp = (a, b) => new Big(a).gsp(b);
+Big.smp = (a, b) => new Big(a).smp(b);
+Big.smn = (a, b) => new Big(a).smn(b);
+Big.add = (a, b) => new Big(a).add(b);
+Big.sub = (a, b) => new Big(a).sub(b);
+Big.mul = (a, b) => new Big(a).mul(b);
+Big.div = (a, b) => new Big(a).div(b);
+Big.pow = (a, b) => new Big(a).pow(b);
+Big.exp = (a, b) => new Big(a).exp(b);
+Big.log = (a, b) => new Big(a).log(b);
+Big.min = (a, b) => new Big(a).min(b);
+Big.max = (a, b) => new Big(a).max(b);
+Big.gt = (a, b) => new Big(a).gt(b);
+Big.lte = (a, b) => new Big(a).lte(b);
+Big.eq = (a, b) => new Big(a).eq(b);
+Big.neq = (a, b) => new Big(a).neq(b);
+Big.lt = (a, b) => new Big(a).lt(b);
+Big.gte = (a, b) => new Big(a).gte(b);
+Big.str = (a) => new Big(a).str();
 
 $enm = new Big(1000000).exp(10).exp(10).exp(10);
