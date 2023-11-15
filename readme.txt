@@ -6,7 +6,7 @@ so 1 will have 6 decimals of precision and 3.16228 will have 5 (its 10^0.5, roun
 magnitude notation starts when there would be -1 decimals of precision; 3162278, 0.316228e7
 exponential notation starts at 1000 rounded orders of magnitude; 1e999, e1000
 repeats for the number after the e; e0.316228e7, ee1000 etc
-tetrational notation starts at 10^10^10^1000000 using quadratic approximation for decimals
+tetrational notation starts at 10^10^10^1000000 using the quadratic approximation
 so e.g. 10^1000000 = 10^10^6 = 10^10^10^0.778151 = 10^^(3 + sroot 0.778151 base 10) = approx. 10^^2.84624
 
 how to use:
