@@ -1,4 +1,4 @@
-goes up to 10^^1.797693e308 according to the string conversion, negative and inverse numbers have normal javascript number range
+goes up to 10^^1.798e308 according to the string conversion, negative and inverse numbers have normal javascript number range
 
 string conversion details:
 decimal precision of a number is always 3 - the orders of magnitude rounded
