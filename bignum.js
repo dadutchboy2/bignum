@@ -4,70 +4,68 @@
 
 //the math relies HEAVILY on the amount of precision and the above rules lmfao
 
-$sff = (num, dig) =>
-	(num < 0 ? "-" : "") + Math.floor(Math.abs(num) + 10 ** -dig / 2) + (
-		dig > 0 ? "." + (
-			"0".repeat(dig) + Math.round(Math.abs(num) * 10 ** dig)
-		).substr(-dig) : ""
-	);
-
-$sfe = (num, dig) =>
-	((m) =>
-		m.gte(-dig - .5) && m.lt(dig + .5) ?
-			$sff(num.val, Math.round(dig - m.val)) :
-			$sff(num.div(new Big(Math.round(m.val)).exp(10)).val, dig) +
-				"e" + Math.round(m.val)
-	)(num.mul(num.lt(0) ? -1 : 1).log(10));
-
-$ln = (n) => Math.log(n);
-$lln = (n) => Math.log($ln(n));
-$llln = (n) => Math.log($lln(n));
-
-$ptc = (num, bas) =>
-	((a, hei) => (
-		bas > Math.E ? (
-			hei >= 3 && (a = a.smn($llln(bas))),
-			hei >= 2 && (a = a.sub($lln(bas))),
-			hei >= 1 && (a = a.div($ln(bas))),
-			bas ** a.val != Infinity && hei > 0 && (a.val = bas ** a.val, hei--)
-		) : (
-			hei >= 3 && (a = a.smp($lln(1 / $ln(bas)))),
-			hei >= 2 && (a = a.add($ln(1 / $ln(bas)))),
-			hei >= 1 && (a = a.mul(1 / $ln(bas))),
-			a.hei == 1 && (a = a.log(bas), hei++)
+$big = {
+	sff: (num, dig) =>
+		(num < 0 ? "-" : "") + Math.floor(Math.abs(num) + 10 ** -dig / 2) + (
+			dig > 0 ? "." + (
+				"0".repeat(dig) + Math.round(Math.abs(num) * 10 ** dig)
+			).substr(-dig) : ""
 		),
-		[a.val, hei]
-	))(new Big(num.val), num.hei);
-
-$ld = (n) => Math.log(n) * Math.LOG10E;
-$lnd = Math.log(10);
-
-$str = (a) =>
-	a.val == 0 || !Number.isFinite(a.val) ? "" + a.val :
-	a.log(10).lt(6.5) ? $sfe(a, Math.round(a.log(10).val) + 1) :
-	(([val, hei]) =>
-		a.lt($enm) ? ((num) => (
-			num.lt(1000) && ((num = num.exp(10)), hei--),
-			"e".repeat(hei) + $sfe(num, 6)
-		))(new Big(val)) : (
-			((f) => f(f))((f) => {
-				val <= 0 ? (
-					val = 10 ** val,
-					hei--,
-					f(f)
-				) : val <= 1 ? (
-					val =
-						(2 * $lnd) / (1 + $lnd) * val +
-						(1 - $lnd) / (1 + $lnd) * val ** 2
-				) : (
-					val = $ld(val),
-					hei++,
-					f(f)
-				)
-			}),
-			"10^^" + $sfe(new Big(hei - 1 + val), 6)
-		)
-	)($ptc(a, 10));
+	sfe: (num, dig) =>
+		((m) =>
+			m.gte(-dig - .5) && m.lt(dig + .5) ?
+				$big.sff(num.val, Math.round(dig - m.val)) :
+				$big.sff(num.div(new Big(Math.round(m.val)).exp(10)).val, dig) +
+					"e" + Math.round(m.val)
+		)(num.mul(num.lt(0) ? -1 : 1).log(10)),
+	ln: (n) => Math.log(n),
+	lln: (n) => Math.log($big.ln(n)),
+	llln: (n) => Math.log($big.lln(n)),
+	ptc: (num, bas) =>
+		((a, hei) => (
+			bas > Math.E ? (
+				hei >= 3 && (a = a.smn($big.llln(bas))),
+				hei >= 2 && (a = a.sub($big.lln(bas))),
+				hei >= 1 && (a = a.div($big.ln(bas))),
+				bas ** a.val != Infinity && hei > 0 && (a.val = bas ** a.val, hei--)
+			) : (
+				hei >= 3 && (a = a.smp($big.lln(1 / $big.ln(bas)))),
+				hei >= 2 && (a = a.add($big.ln(1 / $big.ln(bas)))),
+				hei >= 1 && (a = a.mul(1 / $big.ln(bas))),
+				a.hei == 1 && (a = a.log(bas), hei++)
+			),
+			[a.val, hei]
+		))(new Big(num.val), num.hei),
+	ld: (n) => Math.log(n) * Math.LOG10E,
+	lnd: Math.log(10),
+	str: (a) =>
+		a.val == 0 || !Number.isFinite(a.val) ? "" + a.val :
+		a.log(10).lt(3.5) ? $big.sfe(a, Math.round(a.log(10).val) +
+			(a.val % 1 == 0 ? 0 : 2)) :
+		(([val, hei]) =>
+			a.lt($big.enm) ? ((num) => (
+				num.lt(1000) && ((num = num.exp(10)), hei--),
+				"e".repeat(hei) + $big.sfe(num, 3)
+			))(new Big(val)) : (
+				((f) => f(f))((f) => {
+					val <= 0 ? (
+						val = 10 ** val,
+						hei--,
+						f(f)
+					) : val <= 1 ? (
+						val =
+							(2 * $big.lnd) / (1 + $big.lnd) * val +
+							(1 - $big.lnd) / (1 + $big.lnd) * val ** 2
+					) : (
+						val = $big.ld(val),
+						hei++,
+						f(f)
+					)
+				}),
+				"10^^" + $big.sfe(new Big(hei - 1 + val), 3)
+			)
+		)($big.ptc(a, 10)),
+}
 
 class Big {
 	constructor(n) {
@@ -219,7 +217,7 @@ class Big {
 	lt(n) {return this.cmp(n) == -1;}
 	gte(n) {return this.cmp(n) != -1;}
 	str() {
-		return $str(new Big(this));
+		return $big.str(new Big(this));
 	}
 }
 
@@ -244,4 +242,4 @@ Big.lt = (a, b) => new Big(a).lt(b);
 Big.gte = (a, b) => new Big(a).gte(b);
 Big.str = (a) => new Big(a).str();
 
-$enm = new Big(1000000).exp(10).exp(10).exp(10);
+$big.enm = new Big(1000000).exp(10).exp(10).exp(10);
