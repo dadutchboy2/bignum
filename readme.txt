@@ -7,7 +7,7 @@ magnitude notation starts at 10^3.5; 3161, 0.316e4
 exponential notation starts at 10^3.5 orders of magnitude; 1.895e3162 -> e0.316e4
 repeats for the number after the e; e1000, ee1000 etc
 tetrational notation starts at 10^10^10^1000000 using the quadratic approximation
-so e.g. 10^1000000 = 10^10^6 = 10^10^10^0.778151 = 10^^(3 + sroot 0.778151 base 10) = approx. 10^^2.84624
+so e.g. 10^1000000 = 10^10^6 = 10^10^10^0.778 = 10^^(3 + sroot 0.778 base 10) = approx. 10^^2.846
 
 how to use:
 1 convert number to bignum with e.g. new Big(100)
