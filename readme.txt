@@ -3,9 +3,9 @@ goes up to 10^^1.797693e308 according to the string conversion, negative and inv
 string conversion details:
 decimal precision of a number is always 3 - the orders of magnitude rounded
 so e.g. 1.234 will have 3 decimals of precision and 3.16 will have 2 (its 10^0.5, rounds up to 1, 3 - 1 = 2)
-magnitude notation starts at 10^3.5; 3161, 0.316e7
-exponential notation starts at 1000 orders of magnitude; 9.999e999, e1000
-repeats for the number after the e; e0.316e7, ee1000 etc
+magnitude notation starts at 10^3.5; 3161, 0.316e4
+exponential notation starts at 10^3.5 orders of magnitude; 1.895e3162 -> e0.316e4
+repeats for the number after the e; e1000, ee1000 etc
 tetrational notation starts at 10^10^10^1000000 using the quadratic approximation
 so e.g. 10^1000000 = 10^10^6 = 10^10^10^0.778151 = 10^^(3 + sroot 0.778151 base 10) = approx. 10^^2.84624
 
