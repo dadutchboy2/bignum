@@ -44,7 +44,7 @@ $big = {
 			(a.val % 1 == 0 ? Math.round(a.log(10).val) : 3)) :
 		(([val, hei]) =>
 			a.lt($big.enm) ? ((num) => (
-				num.lt(Big.exp(1000, 10).mul(0.9995).log(10)) &&
+				num.lt(Big.log(0.9995, 10).add(1000)) &&
 					((num = num.exp(10)), hei--),
 				"e".repeat(hei) + $big.sfe(num, 3)
 			))(new Big(val)) : (
