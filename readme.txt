@@ -2,7 +2,7 @@ goes up to 10^^1.798e308 according to the string conversion, negative and invers
 
 string conversion details:
 decimal precision of a number is always 3 - the orders of magnitude rounded
-so e.g. 0.456 and 1.234 will have 3 decimals of precision, 4.56 and 12.34 will have 2
+so e.g. 0.789 and 1.234 will have 3 decimals of precision, 7.89 and 12.34 will have 2
 magnitude notation starts at 10^3.5 (and negative magnitudes at 10^-3.5)
 1000, 1.000e4
 exponential notation starts at 10^10^3.5
