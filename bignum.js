@@ -218,7 +218,9 @@ class Big {
 	lt(n) {return this.cmp(n) == -1;}
 	gte(n) {return this.cmp(n) != -1;}
 	str() {
-		return $big.str(new Big(this));
+		return ((sign) =>
+			sign == 0 ? "0" : (sign == -1 ? "-" : "") + $big.str(this.mul(sign))
+		)(this.cmp(0));
 	}
 }
 
