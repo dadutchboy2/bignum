@@ -40,11 +40,12 @@ $big = {
 	lnd: Math.log(10),
 	str: (a) =>
 		a.val == 0 || !Number.isFinite(a.val) ? "" + a.val :
-		a.log(10).lt(3.5) ? $big.sfe(a, Math.round(a.log(10).val) +
-			(a.val % 1 == 0 ? 0 : 2)) :
+		a.log(10).lt(3.5) ? $big.sfe(a,
+			(a.val % 1 == 0 ? Math.round(a.log(10).val) : 3)) :
 		(([val, hei]) =>
 			a.lt($big.enm) ? ((num) => (
-				num.lt(1000) && ((num = num.exp(10)), hei--),
+				num.lt(Big.exp(1000, 10).mul(0.9995).log(10)) &&
+					((num = num.exp(10)), hei--),
 				"e".repeat(hei) + $big.sfe(num, 3)
 			))(new Big(val)) : (
 				((f) => f(f))((f) => {
