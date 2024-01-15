@@ -1,4 +1,4 @@
-goes up to 10^^(2^2^10), not made for negative and inverse numbers but they can be stored and used
+goes up to 10^^(2^2^10), not made for but allows negative and inverse numbers
 
 string conversion details:
 there are 2 decimals of precision until 10^1.5
