@@ -50,7 +50,8 @@ $bignum = {
 		a.val == 0 || !Number.isFinite(a.val) ? "" + a.val :
 		a.log(10).lt(6.5) ?
 			$bignum.sff(a.val,
-				a.val % 1 == 0 ? 0 : Math.round(Math.round(6 - a.log(10).val) / 3)
+				a.val % 1 == 0 ? 0 :
+					Math.round(Math.round(6 - Math.max(0, a.log(10).val)) / 3), 2
 			) :
 		(([val, hei]) =>
 			a.lt($bignum.enm) ? ((num) => (
@@ -73,7 +74,7 @@ $bignum = {
 						f(f)
 					)
 				}),
-				"10^^" + $bignum.sfe(new Big(hei - 1 + val), 6)
+				"10^^" + $bignum.str(new Big(hei - 1 + val))
 			)
 		)($bignum.ptc(a, 10)),
 }
@@ -279,4 +280,4 @@ Big.rou = (a) => new Big(a).rou();
 Big.cei = (a) => new Big(a).cei();
 Big.mod = (a, b) => new Big(a).mod(b);
 
-$bignum.enm = new Big(1000000).exp(10).exp(10).exp(10);
+$bignum.enm = new Big(6.5).exp(10).exp(10).exp(10).exp(10);
