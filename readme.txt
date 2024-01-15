@@ -1,4 +1,4 @@
-goes up to 10^^(2^2^10), negative and inverse numbers have normal javascript number range
+goes up to 10^^(2^2^10), not made for negative and inverse numbers
 
 string conversion details:
 there are 2 decimals of precision until 10^1.5
