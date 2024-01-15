@@ -1,16 +1,22 @@
-goes up to 10^^1.798e308 according to the string conversion, negative and inverse numbers have normal javascript number range
+goes up to 10^^(2^2^10), negative and inverse numbers have normal javascript number range
 
 string conversion details:
-decimal precision of a number is always 3 - the orders of magnitude rounded
-so e.g. 0.789 and 1.234 will have 3 decimals of precision, 7.89 and 12.34 will have 2
-magnitude notation starts at 10^3.5 (and negative magnitudes at 10^-3.5)
-1000, 1.000e4
-exponential notation starts at 10^10^3.5
-1.000e1000, e1.000e4
-repeats for the number after the e
-ee1.000e4, eee1.000e4
-tetrational notation starts at 10^10^10^1000000 using the quadratic approximation
-so e.g. 10^1000000 = 10^10^6 = 10^10^10^0.778 = 10^^(3 + sroot 0.778 base 10) = approx. 10^^2.846
+there are 2 decimals of precision until 10^1.5
+12.34
+there is 1 decimal of precision from 10^1.5 to 10^4.5
+1,234.6
+numbers are rounded after 10^4.5
+1,234,568
+numbers get represented using scientific notation after 10^6.5
+1.00000e7
+exponent in scientific notation increases when reaching 10^0.5
+3.00000e7 0.40000e8
+scientific notation has (6 - round(log10(exponent))) decimals of precision
+1.00000e10 1.0000e100
+exponents also get represented using scientific notation after 10^6.5
+1e1,000,000 e1.00000e7
+numbers get represented using tetration after 10^10^10^10^6.5
+ee1e1,000,000 10^^4.90
 
 how to use:
 1 convert number to bignum with e.g. new Big(100)
