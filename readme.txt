@@ -40,4 +40,4 @@ how to use:
   - bignum.neq(x) bignum != x
   - bignum.lt(x)  bignum <  x
   - bignum.gte(x) bignum >= x
-  - bignum.str() converts to string (100, 1e100, ee1e100, 10^^10)
+  - bignum.str()  converts to string
